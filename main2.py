@@ -1,22 +1,19 @@
-from celda import celda
 import random
 import sys
+
+from celda import celda
 from timer import Timer
 
 # Declaración de variables
 
 # Cadena usada para convertir a lista, y traducir y dar nombre a cada celda
-from pip._vendor.requests.packages.chardet.langcyrillicmodel import MacCyrillicModel
 
 posibles = "ABCDEFGHIJKLMNOPQRSTUVWXYZ@#$%&"
 # Declaración de la matriz en la que almacenamos objetos de la clase celda
 #Matriz = [[celda("", "", False) for x in range(0, 30)] for y in range(0, 30)]
-Matriz = []
+
 # Lista en la que irán los numeros de celda en los que hay bomba
-numeros = []
-fi = 0
-co = 0
-bo = 0
+
 # Caracteres dados para dibujar el tablero
 COE = u'\u2500'  # ─
 CNS = u'\u2502'  # │
