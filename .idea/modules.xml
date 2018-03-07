@@ -2,8 +2,8 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/../Buscaminas/.idea/Buscaminas-sermotr-marodri.iml" filepath="$PROJECT_DIR$/../Buscaminas/.idea/Buscaminas-sermotr-marodri.iml" />
-      <module fileurl="file://$PROJECT_DIR$/../BuscaminasGit/.idea/BuscaminasGit.iml" filepath="$PROJECT_DIR$/../BuscaminasGit/.idea/BuscaminasGit.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/Buscaminas-sermotr-marodri.iml" filepath="$PROJECT_DIR$/.idea/Buscaminas-sermotr-marodri.iml" />
+      <module fileurl="file://$PROJECT_DIR$/../Buscaminass/.idea/Buscaminass.iml" filepath="$PROJECT_DIR$/../Buscaminass/.idea/Buscaminass.iml" />
     </modules>
   </component>
 </project>
