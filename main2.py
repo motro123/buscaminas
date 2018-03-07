@@ -48,7 +48,17 @@ cSup = CES + COE * 25 + CSO
 cInf = CNE + COE * 25 + CON
 
 
-# funcion para mostrar el tablero
+
+
+
+
+
+#################
+# Funcion para mostrar el tablero. Espera un input, que determinara la salida del programa.
+# Si la entrada es 1, 2 o 3, se mostraran tableros de distintos tamaños.
+# Si la entrada es 4 se leera un fichero que carga un tablero predefinido.
+# Si la entrada es 5, se sale del menú
+#################
 def imprimemenu():
     print(cSup)
     print(CNS + " " + "BUSCAMINAS" + "              " + CNS)
@@ -64,6 +74,11 @@ def imprimemenu():
     print(cInf)
 
 
+################
+# Función para el menú, que selecciona la dificultad elegida por la entrada del usuario.
+# Espera valores entre 1 y 5, si recibe valores distintos, mostrará un error y pedirá otra entrada
+################
+
 def seledificultad():
     imprimemenu()
     sele = input()
@@ -72,7 +87,7 @@ def seledificultad():
         print("Numero erroneo, vuelva a intentarlo")
         sele = input()
 
-    if int(sele) == 1:  # n es el numero de filas, FALTA TENER EN CUENTA COLUMNAS !!!
+    if int(sele) == 1:
         global fi
         global co
         global bo
@@ -81,32 +96,30 @@ def seledificultad():
         bo = 10
         nuevaPartida(fi, co , bo)
 
-    else:
-        if int(sele) == 2:
-            nuevaPartida(16,16,40)
-            numbombas = 40
-        else:
-            if int(sele) == 3:
-                fi = 16
-                co = 30
-                bo = 99
-                nuevaPartida(co, fi, bo)  # Anchura 30
+    elif int(sele) == 2:
+        nuevaPartida(16,16,40)
 
-            else:
-                if int(sele) == 4:  # importar archivo
-                    n = 123
-                else:
-                    if int(sele) == 5:
-                        print("Fin del Juego")
-                        sys.exit(0)
+    elif int(sele) == 3:
+        fi = 16
+        co = 30
+        bo = 99
+        nuevaPartida(co, fi, bo)  # Anchura 30
+
+    elif int(sele) == 4:
+          # importar archivo
+            n = 123
+    elif int(sele) == 5:
+        print("Fin del Juego")
+        sys.exit(0)
 
 
 #################
-# Función que inicializa una nueva partida, pasandole un parámetro para darle la dimension i*i adecuada. Siendo i mayor
-# que 1
+# Función que inicializa una nueva partida, pasandole un parámetro para darle la dimension i*j adecuada, y el numero
+# de bombas de la partida. Siendo siempre i mayor que 1
 # @param i El tipo esperado es int
 #################
 def nuevaPartida(i, j, b):
+    assert i>5,"Debe ser mayor que 4"
     global Matriz
     global numeros
     global tim
@@ -117,13 +130,13 @@ def nuevaPartida(i, j, b):
     crearMatriz(i,j,b)
     salidaTablero()
     generarAdyacentes()
-    #seledificultad()
+
 
 
 
 #####################
-# Función para dibujar el tablero
-# @param n, y numero de filas y de columnas respectivamente
+# Función para dibujar el tablero, tambien lo usamos para repintarle.
+#
 #####################
 
 def salidaTablero():
@@ -145,7 +158,7 @@ def tableroFilaInicial(n):
     suma2 = cBIn0
     for i in range(0, n - 2):
         if i == 0:
-            cCC0 = "  "+ CNS+" " + Matriz[0][i].n1 + Matriz[0][i + 1].n2 + CNS
+            cCC0 = "  "+ CNS+" " + Matriz[0][i].n1 + Matriz[0][i].n2 + CNS
             suma1 = cCC0
         cCC0 = " " + Matriz[0][i].n1 + Matriz[0][i + 1].n2 + CNS
         suma0 = suma0 + cTC0
@@ -355,18 +368,18 @@ def generarAdyacentes():
                     Matriz[i][j].adyacentes[2] = Matriz[i+1][j]
                     Matriz[i][j].adyacentes[4] = Matriz[i + 1][j + 1]
                     Matriz[i][j].adyacentes[5] = Matriz[i][j + 1]
-
-                elif i - 1 < 0 and j + 1 <= len(Matriz) - 1 and (j+1) % 2 == 0:
+                # FILA 0, IMPAR, EJEMPLO AB
+                elif i - 1 < 0 and j + 1 <= len(Matriz) - 1:
                     Matriz[i][j].adyacentes[2] = Matriz[i][j + 1]
                     Matriz[i][j].adyacentes[3] = Matriz[i][j - 1]
                     Matriz[i][j].adyacentes[4] = Matriz[i + 1][j]
-                   # Matriz[i][j].adyacentes[5] = Matriz[i][j + 1]
+                    Matriz[i][j].adyacentes[5] = Matriz[i+1][j + 1]
 
-                elif i - 1 < 0 and j + 1 <= len(Matriz) - 1 and (j+1) % 2 != 0:
-                    Matriz[i][j].adyacentes[2] = Matriz[i][j + 1]
-                    Matriz[i][j].adyacentes[3] = Matriz[i][j - 1]
-                    Matriz[i][j].adyacentes[4] = Matriz[i + 1][j]
-                    Matriz[i][j].adyacentes[5] = Matriz[i][j + 1]
+                # elif i - 1 < 0 and j + 1 <= len(Matriz) - 1 and (j+1) % 2 != 0:
+                #     Matriz[i][j].adyacentes[2] = Matriz[i][j + 1]
+                #     Matriz[i][j].adyacentes[3] = Matriz[i][j - 1]
+                #     Matriz[i][j].adyacentes[4] = Matriz[i + 1][j]
+                #     Matriz[i][j].adyacentes[5] = Matriz[i+1][j + 1]
 
                 elif j - 1 < 0 and i + 1 <= len(Matriz) - 1:
                     Matriz[i][j].adyacentes[3] = Matriz[i][j - 1]
@@ -403,10 +416,13 @@ def generarAdyacentes():
 
 
 
-
-
+################
+# Función main, lanzada al ejecutar el archivo
+#
+################
 def main():
     seledificultad()
 
 if __name__ == "__main__":
     main()
+
