@@ -106,13 +106,25 @@ def seledificultad():
         nuevaPartida(co, fi, bo)  # Anchura 30
 
     elif int(sele) == 4:
-          # importar archivo
-            n = 123
+        print("Inserte el nombre del archivo que desea abrir, el nombre no debe incluir la extension y estar en el path de los archivos py:")
+        nombre = str(input())
+
+        mario = str(nombre) + ".txt"
+        archfijo = leematriz(mario)
+        numfilas = int(archfijo[0][0])
+        numcolumnas = int(archfijo[0][1])
+        matrizfija = archfijo[1: numfilas + 1][0: numcolumnas]
+        print(matrizfija)
     elif int(sele) == 5:
         print("Fin del Juego")
         sys.exit(0)
 
 
+
+##Funcion encargada de leer el archivo file del mismo drectorio en el que están los archivos py
+def leematriz(file):
+    contents = open(file).read()
+    return [item.split() for item in contents.split('\n')]
 #################
 # Función que inicializa una nueva partida, pasandole un parámetro para darle la dimension i*j adecuada, y el numero
 # de bombas de la partida. Siendo siempre i mayor que 1
